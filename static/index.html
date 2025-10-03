@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant Bala by Yedilov</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <img src="/static/images/logo.png" alt="Логотип" class="chat-logo">
+            <div class="header-text">
+                <h2>Assistant Bala by Yedilov</h2>
+                <span>Online</span>
+            </div>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <div id="message-list">
+                <div class="message bot-message">
+                    <p>Сәлеметсіз бе! Мен колледж көмекшісімін. Сізге қандай ақпарат қажет?</p>
+                </div>
+            </div>
+            <div class="suggested-questions" id="suggested-questions">
+                <button class="suggestion-btn">Қабылдау мерзімі?</button>
+                <button class="suggestion-btn">Мамандықтар тізімі</button>
+                <button class="suggestion-btn">Жатақхана туралы</button>
+            </div>
+        </div>
+        <form class="chat-input" id="chat-form">
+            <input type="text" id="user-input" placeholder="Хабарлама жазыңыз...">
+            <button type="submit">Жіберу</button>
+        </form>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
