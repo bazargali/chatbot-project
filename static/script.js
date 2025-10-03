@@ -1,4 +1,4 @@
-// script.js (ТЕК МӘТІНМЕН ЖҰМЫС ІСТЕЙТІН ҚАРАПАЙЫМ НҰСҚА)
+// script.js (СҰХБАТ ТАРИХЫН САҚТАУ ФУНКЦИЯСЫМЕН)
 
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
@@ -8,7 +8,10 @@ const suggestedQuestions = document.getElementById('suggested-questions');
 const suggestionBtns = document.querySelectorAll('.suggestion-btn');
 const converter = new showdown.Converter();
 
-// Форма арқылы хабарлама жіберу
+// --- ЖАҢА: Сұхбат тарихын сақтайтын массив ---
+let chatHistory = [];
+
+// --- EVENT LISTENERS (Өзгеріссіз) ---
 chatForm.addEventListener('submit', function(event) {
     event.preventDefault(); 
     const messageText = userInput.value.trim();
@@ -17,7 +20,6 @@ chatForm.addEventListener('submit', function(event) {
     }
 });
 
-// Дайын сұрақтарды басқанда хабарлама жіберу
 suggestionBtns.forEach(button => {
     button.addEventListener('click', () => {
         const question = button.textContent;
@@ -25,9 +27,8 @@ suggestionBtns.forEach(button => {
     });
 });
 
-/**
- * Хабарламаны экранға қосып, серверге жіберетін негізгі функция
- */
+// --- НЕГІЗГІ ФУНКЦИЯЛАР ---
+
 async function sendMessage(messageText) {
     addMessage(messageText, 'user');
     userInput.value = '';
@@ -50,14 +51,15 @@ async function sendMessage(messageText) {
 
     } catch (error) {
         console.error('Қате:', error);
-        addMessage('Кешіріңіз, қателік шықты.', 'bot');
+        addMessage('Кешіріңіз, қателік шықты. Кейінірек қайталап көріңіз.', 'bot');
     }
 }
 
 /**
- * Жаңа хабарламаны чат терезесіне қосады
+ * Жаңа хабарламаны чат терезесіне қосады және тарихты сақтайды
+ * @param {boolean} save - Тарихқа сақтау керек пе, жоқ па
  */
-function addMessage(text, sender) {
+function addMessage(text, sender, save = true) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', `${sender}-message`);
     
@@ -73,4 +75,42 @@ function addMessage(text, sender) {
     messageElement.appendChild(textElement);
     messageList.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
+
+    // --- ЖАҢА: Хабарламаны тарихқа және localStorage-ке сақтау ---
+    if (save) {
+        chatHistory.push({ text, sender });
+        saveChatHistory();
+    }
 }
+
+// --- ЖАҢА: Тарихты localStorage-ке сақтайтын функция ---
+function saveChatHistory() {
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+}
+
+// --- ЖАҢА: Бет жүктелгенде тарихты экранға шығаратын функция ---
+function loadChatHistory() {
+    const savedHistory = localStorage.getItem('chatHistory');
+    if (savedHistory) {
+        chatHistory = JSON.parse(savedHistory);
+        
+        // Бастапқы хабарламаларды тазалап, сақталған тарихты көрсетеміз
+        messageList.innerHTML = ''; 
+        
+        chatHistory.forEach(message => {
+            addMessage(message.text, message.sender, false); // false - қайтадан сақтамау үшін
+        });
+
+        // Егер сұхбат басталған болса, ұсынылатын сұрақтарды жасырамыз
+        if (chatHistory.length > 1) {
+             if (suggestedQuestions) {
+                suggestedQuestions.style.display = 'none';
+            }
+        }
+    }
+}
+
+// --- Беттің ең бірінші жүктелуі ---
+document.addEventListener('DOMContentLoaded', (event) => {
+    loadChatHistory();
+});
