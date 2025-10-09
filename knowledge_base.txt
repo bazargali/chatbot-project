@@ -21,12 +21,12 @@
 
 ### Мамандықтар ###
 Колледжде келесідей негізгі мамандықтар бойынша оқыту жүргізіледі:
-1.  07150100 - Технологиялық машиналар мен жабдықтар (түрлері бойынша)
-2.  07140500 - Сандық техника (түрлері бойынша)
+1.  07150100 - Технологиялық машиналар мен жабдықтар
+2.  07140500 - Сандық техника
 3.  07130200 - Ғимараттар мен құрылыстарды салу және пайдалану
 4.  07160700 - Автомобиль көлігіне техникалық қызмет көрсету, жөндеу және пайдалану
-5.  07110100 - Дәнекерлеу ісі (түрлері бойынша)
-6.  06130100 - Бағдарламалық қамтамасыз ету (түрлері бойынша)
+5.  07110100 - Дәнекерлеу ісі
+6.  06130100 - Бағдарламалық қамтамасыз ету
 7.  04110100 - Есеп және аудит
 8.  07320400 - Автомобиль жолдары мен аэродромдардың құрылысы және пайдаланылуы
 
@@ -39,6 +39,44 @@
 
 ### Шәкіртақы ###
 Шәкіртақы - 42000 теңге.
+
+### Колледж басшылығы ###
+- **Аты-жөні:** Мухамбетпаизова Женискул Сагидоллаевна, 204 кабинет
+  - **Лауазымы:** Директор
+  - **Суреті:** /static/images/staff/direktor.jpg
+
+- **Аты-жөні:** Утеулиев Ержан Бактыбаевич, 205 кабинет
+  - **Лауазымы:** Оқу ісі жөніндегі директордың орынбасары
+  - **Суреті:** /static/images/staff/EB.jpg
+
+- **Аты-жөні:** Мухтаров Абзал Танжарбаевич, 125 кабинет
+  - **Лауазымы:** Оқу-өндірістік ісі жөніндегі директордың орынбасары
+  - **Суреті:** /static/images/staff/AT.png
+
+- **Аты-жөні:** Хайруллаев Ринат Аскерович, 109 кабинет
+  - **Лауазымы:** Ақпараттық технологиялар жөніндегі директордың орынбасары
+  - **Суреті:** /static/images/staff/RA.png
+
+- **Аты-жөні:** Карашев Асылбек Амантаевич
+  - **Лауазымы:** Кәсіптік оқыту жөніндегі директордың орынбасары
+  - **Суреті:** /static/images/staff/AA.png
+
+- **Аты-жөні:** Муканов Сейткали Умбетязович
+  - **Лауазымы:** Шаруашылық ісі жөніндегі директордың орынбасары
+  - **Суреті:** /static/images/staff/SU.png
+
+- **Аты-жөні:** Кабакбаева Асель Муратбаевна
+  - **Лауазымы:** Кадрлар бөлімінің меңгерушісі
+  - **Суреті:** /static/images/staff/AselM.png
+
+- **Аты-жөні:** Муханбетжанова Нургул Ерболатовна
+  - **Лауазымы:** Бас бухгалтер
+
+- **Аты-жөні:** Исмагулова Нургуль Кадирбергеновна, 305 кабинет
+  - **Лауазымы:** Ақпараттық жүйелер бөлімінің басшысы
+
+- **Аты-жөні:** Шаңбаев Дархан Түгелбайұлы
+  - **Лауазымы:** "Автоматтандыру және технологиялық процестерді басқару" бөлімінің меңгерушісі
 </lang:kz>
 
 <lang:ru>
@@ -64,12 +102,12 @@
 
 ### Специальности ###
 В колледже ведется обучение по следующим основным специальностям:
-1.  07150100 - Технологические машины и оборудование (по видам)
-2.  07140500 - Цифровая техника (по видам)
+1.  07150100 - Технологические машины и оборудование
+2.  07140500 - Цифровая техника
 3.  07130200 - Строительство и эксплуатация зданий и сооружений
 4.  07160700 - Техническое обслуживание, ремонт и эксплуатация автомобильного транспорта
-5.  07110100 - Сварочное дело (по видам)
-6.  06130100 - Программное обеспечение (по видам)
+5.  07110100 - Сварочное дело
+6.  06130100 - Программное обеспечение
 7.  04110100 - Учет и аудит
 8.  07320400 - Строительство и эксплуатация автомобильных дорог и аэродромов
 
@@ -82,6 +120,45 @@
 
 ### Стипендия ###
 Стипендия - 42000 тенге.
+
+### Руководство колледжа ###
+- **Имя:** Мухамбетпаизова Женискул Сагидоллаевна, кабинет 204
+  - **Должность:** Директор
+  - **Фото:** /static/images/staff/direktor.jpg
+
+- **Имя:** Утеулиев Ержан Бактыбаевич, кабинет 205
+  - **Должность:** Заместитель директора по учебной работе
+  - **Фото:** /static/images/staff/EB.jpg
+
+- **Имя:** Мухтаров Абзал Танжарбаевич, кабинет 125
+  - **Должность:** Заместитель директора по учебно-производственной работе
+  - **Фото:** /static/images/staff/AT.png
+
+- **Имя:** Хайруллаев Ринат Аскерович, кабинет 109
+  - **Должность:** Заместитель директора по информационным технологиям
+  - **Фото:** /static/images/staff/RA.png
+
+- **Имя:** Карашев Асылбек Амантаевич
+  - **Должность:** Заместитель директора по профессиональному обучению
+  - **Фото:** /static/images/staff/AA.png
+
+- **Имя:** Муканов Сейткали Умбетязович
+  - **Должность:** Заместитель директора по хозяйственной работе
+  - **Фото:** /static/images/staff/SU.png
+
+- **Имя:** Кабакбаева Асель Муратбаевна
+  - **Должность:** Заведующий отдела кадров
+  - **Фото:** /static/images/staff/AselM.png
+
+- **Имя:** Муханбетжанова Нургул Ерболатовна
+  - **Должность:** Главный бухгалтер
+
+- **Имя:** Исмагулова Нургуль Кадирбергеновна, кабинет 305
+  - **Должность:** Начальник отдела информационных систем
+   - **Фото:** /static/images/staff/NK.png
+
+- **Имя:** Шанбаев Дархан Тугелбаевич
+  - **Должность:** Заведующий отделением "Автоматизация и управление технологическими процессами"
 </lang:ru>
 
 <lang:en>
@@ -107,12 +184,12 @@ List of required documents:
 
 ### Specialties / Majors ###
 The college provides training in the following main specialties:
-1.  07150100 - Technological machinery and equipment (by type)
-2.  07140500 - Digital technology (by type)
+1.  07150100 - Technological machinery and equipment
+2.  07140500 - Digital technology
 3.  07130200 - Construction and operation of buildings and structures
 4.  07160700 - Maintenance, repair, and operation of road transport
-5.  07110100 - Welding (by type)
-6.  06130100 - Software development (by type)
+5.  07110100 - Welding
+6.  06130100 - Software development
 7.  04110100 - Accounting and Auditing
 8.  07320400 - Construction and operation of highways and airfields
 
@@ -125,106 +202,42 @@ Paid, 10000 tenge per month.
 
 ### Scholarship ###
 The scholarship is 42000 tenge.
-</lang:en>
 
-<lang:kz>
-### Колледж басшылығы ###
-
-Мухамбетпаизова Женискул Сагидоллаевна, 204 кабинет
-Директор
-
-Утеулиев Ержан Бактыбаевич
-Оқу ісі жөніндегі директордың орынбасары, 205 кабинет
-
-Мухтаров Абзал Танжарбаевич
-Оқу-өндірістік ісі жөніндегі директордың орынбасары, 125 кабинет
-
-Хайруллаев Ринат Аскерович
-Ақпараттық технологиялар жөніндегі директордың орынбасары, 109 кабинет
-
-Карашев Асылбек Амантаевич
-Кәсіптік оқыту жөніндегі директордың орынбасары
-
-Муканов Сейткали Умбетязович
-Шаруашылық ісі жөніндегі директордың орынбасары
-
-Кабакбаева Асель Муратбаевна
-Кадрлар бөлімінің меңгерушісі
-
-Муханбетжанова Нургул Ерболатовна
-Бас бухгалтер
-
-Исмагулова Нургуль Кадирбергеновна
-Ақпараттық жүйелер бөлімінің басшысы, 305 кабинет
-
-Шаңбаев Дархан Түгелбайұлы
-"Автоматтандыру және технологиялық процестерді басқару" бөлімінің меңгерушісі
-</lang:kz>
-
-<lang:ru>
-### Руководство колледжа ###
-
-Мухамбетпаизова Женискул Сагидоллаевна
-Директор
-
-Утеулиев Ержан Бактыбаевич
-Заместитель директора по учебной работе
-
-Мухтаров Абзал Танжарбаевич
-Заместитель директора по учебно-производственной работе
-
-Хайруллаев Ринат Аскерович
-Заместитель директора по информационным технологиям
-
-Карашев Асылбек Амантаевич
-Заместитель директора по профессиональному обучению
-
-Муканов Сейткали Умбетязович
-Заместитель директора по хозяйственной работе
-
-Кабакбаева Асель Муратбаевна
-Заведующий отдела кадров
-
-Муханбетжанова Нургул Ерболатовна
-Главный бухгалтер
-
-Исмагулова Нургуль Кадирбергеновна
-Начальник отдела информационных систем
-
-Шанбаев Дархан Тугелбаевич
-Заведующий отделением "Автоматизация и управление технологическими процессами"
-</lang:ru>
-
-<lang:en>
 ### College Management ###
+- **Name:** Zheniskul Mukhambetpaizova Sagidollaevna, office 204
+  - **Title:** Director
+  - **Photo:** /static/images/staff/direktor.jpg
 
-Zheniskul Mukhambetpaizova Sagidollaevna
-Director
+- **Name:** Yerzhan Uteuliyev Baktybaevich, office 205
+  - **Title:** Deputy Director for Academic Affairs
+  - **Photo:** /static/images/staff/EB.jpg
 
-Yerzhan Uteuliyev Baktybaevich
-Deputy Director for Academic Affairs
+- **Name:** Abzal Mukhtarov Tanzharbaevich, office 125
+  - **Title:** Deputy Director for Educational and Production Work
+  - **Photo:** /static/images/staff/AT.png
 
-Abzal Mukhtarov Tanzharbaevich
-Deputy Director for Educational and Production Work
+- **Name:** Rinat Khairullayev Askerovich, office 109
+  - **Title:** Deputy Director for Information Technologies
+  - **Photo:** /static/images/staff/RA.png
 
-Rinat Khairullayev Askerovich
-Deputy Director for Information Technologies
+- **Name:** Asylbek Karashev Amantaevich
+  - **Title:** Deputy Director for Vocational Training
+  - **Photo:** /static/images/staff/AA.png
 
-Asylbek Karashev Amantaevich
-Deputy Director for Vocational Training
+- **Name:** Seitkali Mukanov Umbatyazovich
+  - **Title:** Deputy Director for Administrative Affairs
+  - **Photo:** /static/images/staff/SU.png
 
-Seitkali Mukanov Umbatyazovich
-Deputy Director for Administrative Affairs
+- **Name:** Asel Kabakbayeva Muratbayevna
+  - **Title:** Head of Human Resources Department
+  - **Photo:** /static/images/staff/AselM.png
 
-Asel Kabakbayeva Muratbayevna
-Head of Human Resources Department
+- **Name:** Nurgul Mukhanbetzhanova Yerbolatovna
+  - **Title:** Chief Accountant
 
-Nurgul Mukhanbetzhanova Yerbolatovna
-Chief Accountant
+- **Name:** Nurgul Ismagulova Kadirbergenovna, office 305
+  - **Title:** Head of the Information Systems Department
 
-Nurgul Ismagulova Kadirbergenovna
-Head of the Information Systems Department
-
-Darkhan Shanbayev Tugelbayuly
-Head of the "Automation and Control of Technological Processes" Department
+- **Name:** Darkhan Shanbayev Tugelbayuly
+  - **Title:** Head of the "Automation and Control of Technological Processes" Department
 </lang:en>

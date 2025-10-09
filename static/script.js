@@ -1,4 +1,4 @@
-// script.js (БАРЛЫҚ ҚАТЕЛЕРІ ТҮЗЕТІЛГЕН СОҢҒЫ НҰСҚА)
+// script.js (СУРЕТТІ ЖӘНЕ ТАРИХТЫ ҚОЛДАЙТЫН СОҢҒЫ НҰСҚА)
 
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
@@ -51,7 +51,7 @@ async function sendMessage(messageText) {
         if (!response.ok) { throw new Error('Сервермен байланыста қателік.'); }
 
         const data = await response.json();
-        addMessage(data.reply, 'bot');
+        addMessage(data.reply, 'bot', true, data.image_url);
 
     } catch (error) {
         console.error('Қате:', error);
@@ -62,25 +62,34 @@ async function sendMessage(messageText) {
     }
 }
 
-function addMessage(text, sender, save = true) {
+function addMessage(text, sender, save = true, image_url = null) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', `${sender}-message`);
     
     const textElement = document.createElement('p');
-    
     if (sender === 'bot') {
         textElement.innerHTML = converter.makeHtml(text);
     } else {
         textElement.textContent = text;
     }
-    
     messageElement.appendChild(textElement);
-    // Қарапайым және сенімді әдіс: әрқашан соңына қосу
+
+    if (image_url) {
+        const imageElement = document.createElement('img');
+        imageElement.src = image_url;
+        imageElement.classList.add('message-image');
+        messageElement.appendChild(imageElement);
+    }
+    
     messageList.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
 
     if (save) {
-        chatHistory.push({ text, sender });
+        const historyEntry = { text, sender };
+        if (image_url) {
+            historyEntry.image_url = image_url;
+        }
+        chatHistory.push(historyEntry);
         saveChatHistory();
     }
 }
@@ -91,23 +100,21 @@ function saveChatHistory() {
 
 function loadChatHistory() {
     const savedHistory = localStorage.getItem('chatHistory');
-    messageList.innerHTML = ''; // Бастамас бұрын тазалау
+    messageList.innerHTML = '';
 
     if (savedHistory && JSON.parse(savedHistory).length > 0) {
         chatHistory = JSON.parse(savedHistory);
         chatHistory.forEach(message => {
-            addMessage(message.text, message.sender, false);
+            addMessage(message.text, message.sender, false, message.image_url);
         });
-
         if (suggestedQuestions) {
             suggestedQuestions.style.display = 'none';
         }
     } else {
-        // Егер тарих бос болса, бастапқы сәлемдесу хабарламасын қосамыз
-        chatHistory = []; // Тарихты тазалау
+        chatHistory = [];
         addMessage('Сәлеметсіз бе! Мен колледж көмекшісімін. Сізге қандай ақпарат қажет?', 'bot', true);
         if (suggestedQuestions) {
-            suggestedQuestions.style.display = 'flex'; // Ұсыныстарды көрсету
+            suggestedQuestions.style.display = 'flex';
         }
     }
 }
