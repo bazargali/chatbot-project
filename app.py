@@ -1,4 +1,4 @@
-# app.py (ЕҢ СОҢҒЫ ТОЛЫҚ НҰСҚА)
+# app.py (ЕҢ СОҢҒЫ, НАҚТЫ ЖӘНЕ ТҮПТІК НҰСҚА)
 
 import os
 import google.generativeai as genai
@@ -18,8 +18,9 @@ try:
     
     system_instruction = "You are a professional assistant for Aktobe Higher Polytechnic College. You must strictly respond in the language of the user's last question (Kazakh, Russian, or English). Do not mix languages."
     
+    # ---!!! СІЗДІҢ КІЛТІҢІЗГЕ ҚОЛЖЕТІМДІ ДҰРЫС МОДЕЛЬ !!!---
     gemini_model = genai.GenerativeModel(
-        'gemini-2.5-flash', # Ең сенімді және үйлесімді модель
+        'gemini-2.5-flash',
         system_instruction=system_instruction
     )
     
@@ -35,21 +36,16 @@ def read_knowledge_base():
         with open(KNOWLEDGE_BASE_FILE, "r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        print(f"Ескерту: '{KNOWLEDGE_BASE_FILE}' файлы табылмады.")
         return ""
 
 def build_prompt(question, context):
     return f"""
 <instructions>
-    <role>Сен — Ақтөбе жоғары политехникалық колледжінің мейірімді әрі кәсіби көмекшісісің.</role>
+    <role>Сен — Ақтөбе жоғары политехникалық колледжінің көмекшісісің.</role>
     <rules>
         <rule>1. Пайдаланушының сұрағының тілін анықтап, жауапты МІНДЕТТІ ТҮРДЕ сол тілде қайтар.</rule>
-        <rule>2. Алдымен сұрақтың жауабын `<context>` ішінен ізде. Егер жауап табылса, сол ақпаратты қолданып жауап бер.</rule>
-        <rule>3. Егер сұрақтың жауабы `<context>` ішінде табылмаса, "менде ондай ақпарат жоқ" деп бірден айтпа. Оның орнына:
-            a) Алдымен сұрақты колледж, оқу немесе студенттік өмір тақырыбына жақындатып, жалпы біліміңді қолданып жауап беруге тырыс.
-            b) Егер сұрақ колледж тақырыбына мүлдем қатысы жоқ болса, онда сыпайы түрде өз негізгі мақсатыңды еске сал. Мысалы: 'Менің негізгі мақсатым — колледж туралы сұрақтарға жауап беру.'
-        </rule>
-        <rule>4. Жауабыңды толық, анық және пайдаланушыға мейірімді стильде жаз.</rule>
+        <rule>2. Жауап беру үшін тек `<context>` ішіндегі ақпаратты қолдан.</rule>
+        <rule>3. Егер жауап табылмаса, сұрақ қойылған тілде "Кешіріңіз, менде бұл туралы ақпарат жоқ" деп жауап бер.</rule>
     </rules>
 </instructions>
 <context>{context}</context>

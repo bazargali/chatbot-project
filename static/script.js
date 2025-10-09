@@ -1,4 +1,4 @@
-// script.js (СҰХБАТ ТАРИХЫН САҚТАУ ФУНКЦИЯСЫМЕН)
+// script.js (БАРЛЫҚ ҚАТЕЛЕРІ ТҮЗЕТІЛГЕН СОҢҒЫ НҰСҚА)
 
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
@@ -6,12 +6,15 @@ const chatBox = document.getElementById('chat-box');
 const messageList = document.getElementById('message-list');
 const suggestedQuestions = document.getElementById('suggested-questions');
 const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+const typingIndicator = document.getElementById('typing-indicator');
 const converter = new showdown.Converter();
 
-// --- ЖАҢА: Сұхбат тарихын сақтайтын массив ---
 let chatHistory = [];
 
-// --- EVENT LISTENERS (Өзгеріссіз) ---
+document.addEventListener('DOMContentLoaded', () => {
+    loadChatHistory();
+});
+
 chatForm.addEventListener('submit', function(event) {
     event.preventDefault(); 
     const messageText = userInput.value.trim();
@@ -27,8 +30,6 @@ suggestionBtns.forEach(button => {
     });
 });
 
-// --- НЕГІЗГІ ФУНКЦИЯЛАР ---
-
 async function sendMessage(messageText) {
     addMessage(messageText, 'user');
     userInput.value = '';
@@ -36,6 +37,9 @@ async function sendMessage(messageText) {
     if (suggestedQuestions) {
         suggestedQuestions.style.display = 'none';
     }
+
+    typingIndicator.style.display = 'flex';
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
         const response = await fetch('/chat', {
@@ -52,13 +56,12 @@ async function sendMessage(messageText) {
     } catch (error) {
         console.error('Қате:', error);
         addMessage('Кешіріңіз, қателік шықты. Кейінірек қайталап көріңіз.', 'bot');
+    } finally {
+        typingIndicator.style.display = 'none';
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 }
 
-/**
- * Жаңа хабарламаны чат терезесіне қосады және тарихты сақтайды
- * @param {boolean} save - Тарихқа сақтау керек пе, жоқ па
- */
 function addMessage(text, sender, save = true) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', `${sender}-message`);
@@ -66,51 +69,45 @@ function addMessage(text, sender, save = true) {
     const textElement = document.createElement('p');
     
     if (sender === 'bot') {
-        const htmlText = converter.makeHtml(text);
-        textElement.innerHTML = htmlText;
+        textElement.innerHTML = converter.makeHtml(text);
     } else {
         textElement.textContent = text;
     }
     
     messageElement.appendChild(textElement);
+    // Қарапайым және сенімді әдіс: әрқашан соңына қосу
     messageList.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // --- ЖАҢА: Хабарламаны тарихқа және localStorage-ке сақтау ---
     if (save) {
         chatHistory.push({ text, sender });
         saveChatHistory();
     }
 }
 
-// --- ЖАҢА: Тарихты localStorage-ке сақтайтын функция ---
 function saveChatHistory() {
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 }
 
-// --- ЖАҢА: Бет жүктелгенде тарихты экранға шығаратын функция ---
 function loadChatHistory() {
     const savedHistory = localStorage.getItem('chatHistory');
-    if (savedHistory) {
+    messageList.innerHTML = ''; // Бастамас бұрын тазалау
+
+    if (savedHistory && JSON.parse(savedHistory).length > 0) {
         chatHistory = JSON.parse(savedHistory);
-        
-        // Бастапқы хабарламаларды тазалап, сақталған тарихты көрсетеміз
-        messageList.innerHTML = ''; 
-        
         chatHistory.forEach(message => {
-            addMessage(message.text, message.sender, false); // false - қайтадан сақтамау үшін
+            addMessage(message.text, message.sender, false);
         });
 
-        // Егер сұхбат басталған болса, ұсынылатын сұрақтарды жасырамыз
-        if (chatHistory.length > 1) {
-             if (suggestedQuestions) {
-                suggestedQuestions.style.display = 'none';
-            }
+        if (suggestedQuestions) {
+            suggestedQuestions.style.display = 'none';
+        }
+    } else {
+        // Егер тарих бос болса, бастапқы сәлемдесу хабарламасын қосамыз
+        chatHistory = []; // Тарихты тазалау
+        addMessage('Сәлеметсіз бе! Мен колледж көмекшісімін. Сізге қандай ақпарат қажет?', 'bot', true);
+        if (suggestedQuestions) {
+            suggestedQuestions.style.display = 'flex'; // Ұсыныстарды көрсету
         }
     }
 }
-
-// --- Беттің ең бірінші жүктелуі ---
-document.addEventListener('DOMContentLoaded', (event) => {
-    loadChatHistory();
-});
