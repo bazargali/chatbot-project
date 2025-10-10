@@ -1,4 +1,4 @@
-# app.py (СУРЕТ КӨРСЕТУ ФУНКЦИЯСЫМЕН СОҢҒЫ НҰСҚА)
+# app.py (СҰХБАТ ТАРИХЫН ҚОЛДАНАТЫН СОҢҒЫ НҰСҚА)
 
 import os
 import re
@@ -20,7 +20,7 @@ try:
     system_instruction = "You are a professional assistant for Aktobe Higher Polytechnic College. You must strictly respond in the language of the user's last question (Kazakh, Russian, or English). Do not mix languages."
     
     gemini_model = genai.GenerativeModel(
-        'gemini-2.5-flash',
+        'gemini-2.5-flash', # Сіздің кілтіңізге қолжетімді дұрыс модель
         system_instruction=system_instruction
     )
     
@@ -38,23 +38,42 @@ def read_knowledge_base():
     except FileNotFoundError:
         return ""
 
-def build_prompt(question, context):
+def format_history(history):
+    """Сұхбат тарихын мәтінге айналдырады."""
+    if not history:
+        return ""
+    formatted_string = ""
+    for message in history:
+        # frontend-тен келетін форматты тексереміз
+        if 'role' in message and 'parts' in message and message['parts']:
+            role = "Пайдаланушы" if message['role'] == 'user' else "Көмекші"
+            formatted_string += f"{role}: {message['parts'][0]['text']}\n"
+    return formatted_string
+
+def build_prompt(question, context, history_str):
+    """Сұхбат тарихын ескеретін жаңа промпт."""
     return f"""
 <instructions>
-    <role>Сен — "Assistant Bala", Ақтөбе жоғары политехникалық колледжінің студенттері мен талапкерлеріне көмектесетін ашық, достық және сөйлесуге дайын зияткерлік көмекшісің.</role>
+    <role>Сен — "Assistant Bala", Ақтөбе жоғары политехникалық колледжінің достық көмекшісісің.</role>
     <rules>
-        <rule>1. Пайдаланушының сұрағының тілін анықтап, жауапты МІНДЕТТІ ТҮРДЕ сол тілде қайтар.</rule>
-        <rule>2. Алдымен сұрақтың жауабын `<context>` ішінен ізде. Егер жауап табылса, сол ақпаратты қолданып жауап бер.</rule>
-        <rule>3. Егер сұралған ақпаратта адам туралы дерек және оның суретінің жолы (`Суреті:/static/...`) болса, жауабыңа сол суреттің жолын МІНДЕТТІ ТҮРДЕ қос.</rule>
-        <rule>4. Егер сұрақтың жауабы `<context>` ішінде табылмаса, "менде ондай ақпарат жоқ" деп бірден айтпа. Оның орнына:
-            a) Алдымен сұрақты колледж, оқу немесе студенттік өмір тақырыбына жақындатып, жалпы біліміңді қолданып жауап беруге тырыс.
-            b) Егер сұрақ колледж тақырыбына мүлдем қатысы жоқ болса, онда сыпайы түрде өз негізгі мақсатыңды еске сал.
-        </rule>
-        <rule>5. Сөйлеу стилі: Робот сияқты құрғақ жауап берме. Әңгімені табиғи, адамша жүргіз. Жауапты "Әрине!", "Иә, ол туралы ақпарат мынадай:" сияқты кіріспе сөздермен бастауға тырыс.</rule>
+        <rule>1. Жауапты МІНДЕТТІ ТҮРДЕ пайдаланушының соңғы сұрағының тілінде қайтар.</rule>
+        <rule>2. Алдымен `<history>` бөлімін оқып, әңгіменің не туралы екенін түсін. "Оның", "сол" сияқты есімдіктер алдыңғы хабарламаларға қатысты болуы мүмкін.</rule>
+        <rule>3. `<context>` ішіндегі ақпаратты қолданып, `<question>`-ға жауап бер.</rule>
+        <rule>4. МАҢЫЗДЫ ЕРЕЖЕ: Егер сұралған ақпаратта адам туралы дерек және оның суретінің жолы (`Суреті:/static/...`) болса, жауабыңа сол суреттің жолын МІНДЕТТІ ТҮРДЕ қос.</rule>
     </rules>
 </instructions>
-<context>{context}</context>
-<question>{question}</question>
+
+<history>
+{history_str}
+</history>
+
+<context>
+{context}
+</context>
+
+<question>
+{question}
+</question>
 """
 
 # --- НЕГІЗГІ МАРШРУТТАР ---
@@ -70,22 +89,27 @@ def chat():
     try:
         data = request.get_json()
         user_message = data.get('message')
+        history = data.get('history', [])
+
+        # Соңғы хабарламаны (дәл қазіргі) тарихтан алып тастаймыз
+        if history:
+            history = history[:-1]
+
         if not user_message:
             return jsonify({'error': 'Хабарлама табылмады'}), 400
         
         knowledge_context = read_knowledge_base()
-        prompt = build_prompt(user_message, knowledge_context)
+        history_str = format_history(history)
+        prompt = build_prompt(user_message, knowledge_context, history_str)
+        
         response = gemini_model.generate_content(prompt)
         bot_response_text = response.text
         
         image_url = None
-        # Суреттің сілтемесін мәтіннен іздейміз
         match = re.search(r'(/static/images/staff/[^\s]+(\.jpg|\.jpeg|\.png|\.gif))', bot_response_text, re.IGNORECASE)
         
         if match:
             image_url = match.group(1)
-            # ---!!! ТҮЗЕТІЛГЕН ЖОЛ !!!---
-            # Суреттің сілтемесін, оның алдындағы "Суреті/Фото:" деген сөзді және артық бос орындарды толығымен өшіреміз
             bot_response_text = re.sub(r'\s*(-|)(Суреті|Фото|Photo):?\s*' + re.escape(image_url), '', bot_response_text, flags=re.IGNORECASE).strip()
 
         return jsonify({'reply': bot_response_text, 'image_url': image_url})

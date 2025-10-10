@@ -1,4 +1,4 @@
-// script.js (СУРЕТТІ ЖӘНЕ ТАРИХТЫ ҚОЛДАЙТЫН СОҢҒЫ НҰСҚА)
+// script.js (СҰХБАТ ТАРИХЫН ҚОЛДАЙТЫН СОҢҒЫ НҰСҚА)
 
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
@@ -45,7 +45,10 @@ async function sendMessage(messageText) {
         const response = await fetch('/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: messageText })
+            body: JSON.stringify({ 
+                message: messageText,
+                history: chatHistory // Тарихты серверге жібереміз
+            })
         });
 
         if (!response.ok) { throw new Error('Сервермен байланыста қателік.'); }
@@ -55,7 +58,7 @@ async function sendMessage(messageText) {
 
     } catch (error) {
         console.error('Қате:', error);
-        addMessage('Кешіріңіз, қателік шықты. Кейінірек қайталап көріңіз.', 'bot');
+        addMessage('Кешіріңіз, қателік шықты.', 'bot');
     } finally {
         typingIndicator.style.display = 'none';
         chatBox.scrollTop = chatBox.scrollHeight;
@@ -63,6 +66,11 @@ async function sendMessage(messageText) {
 }
 
 function addMessage(text, sender, save = true, image_url = null) {
+    // Пайдаланушының хабарламасын тарихқа қосу
+    if (sender === 'user' && save) {
+        chatHistory.push({ role: 'user', parts: [{ text: text }] });
+    }
+
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', `${sender}-message`);
     
@@ -84,12 +92,9 @@ function addMessage(text, sender, save = true, image_url = null) {
     messageList.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    if (save) {
-        const historyEntry = { text, sender };
-        if (image_url) {
-            historyEntry.image_url = image_url;
-        }
-        chatHistory.push(historyEntry);
+    // Боттың хабарламасын тарихқа қосу
+    if (sender === 'bot' && save) {
+        chatHistory.push({ role: 'model', parts: [{ text: text }] });
         saveChatHistory();
     }
 }
@@ -100,12 +105,15 @@ function saveChatHistory() {
 
 function loadChatHistory() {
     const savedHistory = localStorage.getItem('chatHistory');
-    messageList.innerHTML = '';
+    messageList.innerHTML = ''; 
 
     if (savedHistory && JSON.parse(savedHistory).length > 0) {
         chatHistory = JSON.parse(savedHistory);
         chatHistory.forEach(message => {
-            addMessage(message.text, message.sender, false, message.image_url);
+            const sender = (message.role === 'user') ? 'user' : 'bot';
+            // Тарихтағы суреттерді де көрсету керек (егер бар болса)
+            const text = message.parts[0].text;
+            addMessage(text, sender, false); // Тарихты қайта сақтамаймыз
         });
         if (suggestedQuestions) {
             suggestedQuestions.style.display = 'none';
