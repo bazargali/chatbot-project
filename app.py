@@ -1,4 +1,4 @@
-# app.py (СҰХБАТ ТАРИХЫН ЖӘНЕ ЖАҢА ЕРЕЖЕНІ ҚАМТИТЫН СОҢҒЫ НҰСҚА)
+# app.py (БАРЛЫҚ ҚАТЕЛЕРІ ТҮЗЕТІЛГЕН СОҢҒЫ НҰСҚА)
 
 import os
 import re
@@ -56,10 +56,9 @@ def build_prompt(question, context, history_str):
     <role>Сен — "Assistant Bala", Ақтөбе жоғары политехникалық колледжінің достық көмекшісісің.</role>
     <rules>
         <rule>1. Жауапты МІНДЕТТІ ТҮРДЕ пайдаланушының соңғы сұрағының тілінде қайтар.</rule>
-        <rule>2. Алдымен `<history>` бөлімін оқып, әңгіменің не туралы екенін түсін.</rule>
+        <rule>2. Алдымен `<history>` бөлімін оқып, әңгіменің не туралы екенін түсін. "Оның", "сол" сияқты есімдіктер алдыңғы хабарламаларға қатысты болуы мүмкін.</rule>
         <rule>3. `<context>` ішіндегі ақпаратты қолданып, `<question>`-ға жауап бер.</rule>
-        <rule>4. Егер сұралған ақпаратта адам туралы дерек және оның суретінің жолы болса, жауабыңа сол суреттің жолын МІНДЕТТІ ТҮРДЕ қос.</rule>
-        
+        <rule>4. МАҢЫЗДЫ ЕРЕЖЕ: Егер сұралған ақпаратта адам туралы дерек және оның суретінің жолы (`Суреті:/static/...`) болса, жауабыңа сол суреттің жолын МІНДЕТТІ ТҮРДЕ қос.</rule>
         <rule>5. Егер сұрақтың жауабы `<context>` ішінде табылмаса, сұрақ қойылған тілде былай деп жауап бер: "Кешіріңіз, менде бұл сұрақ бойынша нақты ақпарат жоқ. Толығырақ ақпарат алу үшін 206-кабинетке (Оқу бөлімі) жүгінуіңізге болады."</rule>
     </rules>
 </instructions>
@@ -100,7 +99,11 @@ def chat():
         
         knowledge_context = read_knowledge_base()
         history_str = format_history(history)
+        
+        # ---!!! ОСЫ ЖЕР ТҮЗЕТІЛДІ !!!---
+        # Енді сұхбат тарихын AI-ға жібереміз
         prompt = build_prompt(user_message, knowledge_context, history_str)
+        # ---!!! ТҮЗЕТУ АЯҚТАЛДЫ !!!---
         
         response = gemini_model.generate_content(prompt)
         bot_response_text = response.text
@@ -110,9 +113,11 @@ def chat():
         
         if match:
             image_url = match.group(1)
-            bot_response_text = re.sub(r'\s*(-|)(Суреті|Фото|Photo):?\s*' + re.escape(image_url), '', bot_response_text, flags=re.IGNORECASE).strip()
+            # Суреттің сілтемесін, оның алдындағы сөзді және артық бос орындарды толығымен өшіреміз
+            bot_response_text = re.sub(r'\*?\*?(Суреті|Фото|Photo)\*?\*?:\s*' + re.escape(image_url), '', bot_response_text, flags=re.IGNORECASE)
+            bot_response_text = os.linesep.join([s for s in bot_response_text.splitlines() if s])
 
-        return jsonify({'reply': bot_response_text, 'image_url': image_url})
+        return jsonify({'reply': bot_response_text.strip(), 'image_url': image_url})
 
     except Exception as e:
         print(f"Chat функциясында қате: {e}")
