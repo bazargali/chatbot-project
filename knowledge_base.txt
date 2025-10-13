@@ -241,3 +241,63 @@ The scholarship is 42000 tenge.
 - **Name:** Darkhan Shanbayev Tugelbayuly
   - **Title:** Head of the "Automation and Control of Technological Processes" Department
 </lang:en>
+
+<lang:kz>
+### Дуальды оқыту ###
+Колледжде дуальды оқыту (Д/О) жүйесі қарастырылған. Бұл жүйе студенттерге теориялық білімді тікелей өндірісте, яғни серіктес мекемелерде (ЖШС/ЖК) іс жүзіндегі тәжірибемен ұштастыруға мүмкіндік береді. Студенттер оқу процесін Platonus платформасы арқылы жалғастырады.
+
+#### Дуальды оқытуға қажетті құжаттар тізімі:
+1.  Өтініш (білім алушыдан)
+2.  Өтініш (ата-анадан)
+3.  Студенттің жеке куәлігінің көшірмесі
+4.  Ата-анасының жеке куәлігінің көшірмесі
+5.  Дуальды оқыту туралы 3 дана шарт (Кәсіпкерлер палатасында тіркелгеннен кейін)
+6.  Мамандық бойынша жұмысқа орналасқандығы туралы анықтама
+7.  Жұмыс орнынан бұйрықтың көшірмесі (мамандық бойынша)
+8.  БЖЗҚ-дан (ЕНПФ) мәлімдеме
+9.  Тәлімгер берілгендігі туралы анықтама
+10. Скоросшиватель, 5 файл
+
+#### Процесс:
+Дуальды оқытуға өту үшін студент пен ата-ана тарапынан директордың атына өтініш жазылады. Содан кейін студент, жұмыс беруші (мекеме) және колледж арасында үш жақты келісім-шарт жасалады.
+</lang:kz>
+
+<lang:ru>
+### Дуальное обучение ###
+В колледже предусмотрена система дуального обучения (Д/О). Эта система позволяет студентам совмещать теоретические знания с практическим опытом непосредственно на производстве, то есть в партнерских организациях (ТОО/ИП). Учебный процесс студенты продолжают через платформу Platonus.
+
+#### Список необходимых документов для дуального обучения:
+1.  Заявление (от обучающегося)
+2.  Заявление (от родителя)
+3.  Копия удостоверения личности студента
+4.  Копия удостоверения личности родителя
+5.  Договор о дуальном обучении в 3-х экземплярах (после регистрации в Палате предпринимателей)
+6.  Справка о трудоустройстве по специальности
+7.  Копия приказа с места работы (по специальности)
+8.  Выписка из ЕНПФ
+9.  Справка о закреплении наставника
+10. Скоросшиватель, 5 файлов
+
+#### Процесс:
+Для перехода на дуальное обучение студент и родитель пишут заявление на имя директора. Затем заключается трехсторонний договор между студентом, работодателем (организацией) и колледжем.
+</lang:ru>
+
+<lang:en>
+### Dual Education ###
+The college offers a dual education (DE) system. This system allows students to combine theoretical knowledge with practical experience directly in a production environment, i.e., at partner organizations (LLCs/IEs). Students continue their academic process through the Platonus platform.
+
+#### List of required documents for dual education:
+1.  Application (from the student)
+2.  Application (from the parent)
+3.  Copy of the student's ID card
+4.  Copy of the parent's ID card
+5.  Dual education agreement in 3 copies (after registration at the Chamber of Entrepreneurs)
+6.  Certificate of employment in the specialty
+7.  Copy of the employment order from the workplace (by specialty)
+8.  Statement from the UAPF (Unified Accumulative Pension Fund)
+9.  Certificate of assigned mentor
+10. A folder and 5 file pockets
+
+#### Process:
+To transfer to the dual education system, the student and their parent must write an application addressed to the director. Afterward, a tripartite agreement is concluded between the student, the employer (organization), and the college.
+</lang:en>
