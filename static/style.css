@@ -18,6 +18,9 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.85); /* Фонды сәл мөлдір етеміз */
+    backdrop-filter: blur(10px); /* Астындағы фонды бұлдыратамыз */
+    -webkit-backdrop-filter: blur(10px); /* Safari браузері үшін */
 }
 .chat-header {
     background-color: #0D6EFD;
@@ -194,5 +197,39 @@ body {
     .chat-header {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+    }
+}
+
+
+
+/* =================================== */
+/* === КОМПЬЮТЕР ҮШІН ФОН СУРЕТІ === */
+/* =================================== */
+
+/* Экран ені 768px-ден ҮЛКЕН болғанда ғана іске қосылады */
+@media (min-width: 768px) {
+    body {
+        /* Фон суретін қосамыз - енді екі сурет бар */
+        background-image: 
+            /* 1. Артқы фонға логотипті қоямыз (повторяющийся, полупрозрачный) */
+            url('/static/images/staff/background.png');
+            /* 2. Егер бар болса, негізгі фоновый сурет (background.jpg) */
+
+        /* Логотиптің қасиеттері */
+        background-position: 
+            center center, /* Логотиптің позициясы */
+            center center; /* Негізгі фон суретінің позициясы */
+        background-size: 
+            150px, /* Логотиптің өлшемі, мысалы 150px, өз қалауыңызша өзгертіңіз */
+            cover; /* Негізгі фон суретін экранға толық жаяды */
+        background-repeat: 
+            repeat, /* Логотип қайталанады */
+            no-repeat; /* Негізгі фон суреті қайталанбайды */
+        background-attachment: fixed; /* Фон прокрутка жасағанда орнында қалады */
+        
+        /* Фонның мөлдірлігін реттеу үшін overlay */
+        /* Егер background.jpg жоқ болса, бұл қабатты background-color-ге қосуға болады */
+        background-blend-mode: luminosity; /* Логотипті ашық етеді */
+        background-color: rgba(240, 242, 245, 0.8); /* Артқы фон түсі және мөлдірлігі */
     }
 }
