@@ -1,33 +1,37 @@
-/* static/style.css (ТОЛЫҚ СОҢҒЫ НҰСҚА) */
+/* static/style.css (ТАЗАРТЫЛҒАН ЖӘНЕ ФОНЫ ЖҰМСАРТЫЛҒАН) */
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #f0f2f5;
+    background-color: #f0f2f5; /* Телефондағы негізгі фон */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    position: relative; /* Фонды жұмсарту үшін қажет */
+    z-index: 1;
 }
+
 .chat-container {
     width: 420px;
     height: 650px;
-    background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.85); /* Фонды сәл мөлдір етеміз */
-    backdrop-filter: blur(10px); /* Астындағы фонды бұлдыратамыз */
-    -webkit-backdrop-filter: blur(10px); /* Safari браузері үшін */
+    /* Күңгірт шыны эффектісі */
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
+
 .chat-header {
     background-color: #0D6EFD;
     color: white;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex; 
+    display: flex;
     align-items: center;
     flex-shrink: 0;
 }
@@ -51,7 +55,8 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    background-color: #f9f9f9;
+    /* Чаттың ішкі фонын алып тастаймыз, себебі контейнер мөлдір */
+    /* background-color: #f9f9f9; */
     padding: 0 0 10px 0;
 }
 #message-list {
@@ -75,117 +80,57 @@ body {
     line-height: 1.5;
     font-weight: 600;
     word-wrap: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Кішігірім көлеңке */
 }
-.bot-message {
-    align-self: flex-start;
-    align-items: flex-start;
-}
-.bot-message p {
-    background-color: #e9e9eb;
-    color: #000;
-    border-bottom-left-radius: 5px;
-}
-.user-message {
-    margin-left: auto;
-    align-items: flex-end;
-}
-.user-message p {
-    background-color: #007bff;
-    color: white;
-    border-bottom-right-radius: 5px;
-}
-.message-image {
-    max-width: 100%;
-    border-radius: 15px;
-    margin-top: 10px;
-}
-.suggested-questions {
-    padding: 10px 15px 5px 15px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    border-top: 1px solid #f0f0f0;
-    margin-top: auto;
-}
-.suggestion-btn {
-    background-color: #f0f2f5;
-    color: #007bff;
-    border: 1px solid #dee2e6;
-    border-radius: 15px;
-    padding: 6px 12px;
-    margin: 5px;
-    cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.9em;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-.suggestion-btn:hover {
-    background-color: #e9ecef;
-    border-color: #007bff;
-}
-.chat-input {
-    display: flex;
-    padding: 15px;
-    border-top: 1px solid #ddd;
-    background-color: #fff;
-    flex-shrink: 0;
-}
-.chat-input input {
-    flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 10px 18px;
-    font-size: 1em;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-.chat-input input:focus {
-    border-color: #007bff;
-}
-.chat-input button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 22px;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.chat-input button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-.typing-indicator {
-    padding: 0 20px;
-}
-.typing-indicator p {
-    display: flex;
-    align-items: center;
-    padding: 12px 18px !important;
-}
-.typing-indicator span {
-    height: 8px;
-    width: 8px;
-    background-color: #9aa0a6;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 2px;
-    animation: bounce 1.4s infinite ease-in-out both;
-}
+.bot-message { align-self: flex-start; align-items: flex-start; }
+.bot-message p { background-color: #e9e9eb; color: #000; border-bottom-left-radius: 5px; }
+.user-message { margin-left: auto; align-items: flex-end; }
+.user-message p { background-color: #007bff; color: white; border-bottom-right-radius: 5px; }
+.message-image { max-width: 100%; border-radius: 15px; margin-top: 10px; }
+.suggested-questions { padding: 10px 15px 5px 15px; display: flex; flex-wrap: wrap; justify-content: flex-start; border-top: 1px solid rgba(0,0,0,0.05); margin-top: auto; }
+.suggestion-btn { background-color: rgba(255,255,255,0.7); color: #007bff; border: 1px solid #dee2e6; border-radius: 15px; padding: 6px 12px; margin: 5px; cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
+.suggestion-btn:hover { background-color: rgba(233, 236, 239, 0.9); border-color: #007bff; }
+.chat-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background-color: rgba(255,255,255,0.9); flex-shrink: 0; }
+.chat-input input { flex-grow: 1; border: 1px solid #ccc; border-radius: 20px; padding: 10px 18px; font-size: 1em; outline: none; transition: border-color 0.3s ease; }
+.chat-input input:focus { border-color: #007bff; }
+.chat-input button { background-color: #007bff; color: white; border: none; border-radius: 20px; padding: 10px 22px; margin-left: 10px; cursor: pointer; font-size: 1em; font-weight: 600; transition: background-color 0.3s ease, transform 0.2s ease; }
+.chat-input button:hover { background-color: #0056b3; transform: scale(1.05); }
+.typing-indicator { padding: 0 20px; }
+.typing-indicator p { display: flex; align-items: center; padding: 12px 18px !important; }
+.typing-indicator span { height: 8px; width: 8px; background-color: #9aa0a6; border-radius: 50%; display: inline-block; margin: 0 2px; animation: bounce 1.4s infinite ease-in-out both; }
 .typing-indicator span:nth-of-type(1) { animation-delay: -0.32s; }
 .typing-indicator span:nth-of-type(2) { animation-delay: -0.16s; }
-@keyframes bounce {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1.0); }
+@keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+
+/* =================================== */
+/* === КОМПЬЮТЕР ҮШІН ФОН СУРЕТІ (ЖҰМСАРТЫЛҒАН) === */
+/* =================================== */
+@media (min-width: 768px) {
+    body {
+        /* Фонға тек логотипті қоямыз */
+        background-image: url('/static/images/logo.png');
+        background-size: 350px; /* Логотип өлшемін үлкейтеміз */
+        background-repeat: repeat;
+        background-attachment: fixed;
+    }
+    /* Логотиптің үстіне бозаң қабат қосамыз */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(240, 242, 245, 0.95); /* Мөлдірлікті азайтамыз */
+        z-index: -1;
+    }
 }
-@media (max-width: 500px) {
+
+/* =================================== */
+/* === АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ === */
+/* =================================== */
+@media (max-width: 767px) { /* Шекті 767px-ке өзгерттік */
     body {
         align-items: flex-start;
-        background-color: #fff;
+        background-color: #fff; /* Фонды ақ етеміз */
+        background-image: none; /* Фон суретін алып тастаймыз */
     }
     .chat-container {
         width: 100%;
@@ -193,43 +138,22 @@ body {
         max-height: 100vh;
         border-radius: 0;
         box-shadow: none;
+        /* Шыны эффектін өшіреміз */
+        background-color: #fff;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
     .chat-header {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-}
-
-
-
-/* =================================== */
-/* === КОМПЬЮТЕР ҮШІН ФОН СУРЕТІ === */
-/* =================================== */
-
-/* Экран ені 768px-ден ҮЛКЕН болғанда ғана іске қосылады */
-@media (min-width: 768px) {
-    body {
-        /* Фон суретін қосамыз - енді екі сурет бар */
-        background-image: 
-            /* 1. Артқы фонға логотипті қоямыз (повторяющийся, полупрозрачный) */
-            url('/static/images/staff/background.png');
-            /* 2. Егер бар болса, негізгі фоновый сурет (background.jpg) */
-
-        /* Логотиптің қасиеттері */
-        background-position: 
-            center center, /* Логотиптің позициясы */
-            center center; /* Негізгі фон суретінің позициясы */
-        background-size: 
-            150px, /* Логотиптің өлшемі, мысалы 150px, өз қалауыңызша өзгертіңіз */
-            cover; /* Негізгі фон суретін экранға толық жаяды */
-        background-repeat: 
-            repeat, /* Логотип қайталанады */
-            no-repeat; /* Негізгі фон суреті қайталанбайды */
-        background-attachment: fixed; /* Фон прокрутка жасағанда орнында қалады */
-        
-        /* Фонның мөлдірлігін реттеу үшін overlay */
-        /* Егер background.jpg жоқ болса, бұл қабатты background-color-ге қосуға болады */
-        background-blend-mode: luminosity; /* Логотипті ашық етеді */
-        background-color: rgba(240, 242, 245, 0.8); /* Артқы фон түсі және мөлдірлігі */
+    .chat-box {
+         background-color: #f9f9f9; /* Телефонда чат ішіне фон қосамыз */
+    }
+    .chat-input {
+        background-color: #fff;
+    }
+     .suggested-questions {
+        background-color: #fff;
     }
 }
